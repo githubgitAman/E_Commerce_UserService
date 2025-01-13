@@ -3,13 +3,15 @@ package dev.aman.e_commerce_userservice.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
-public class Tokens extends BaseModel {
+public class Token extends BaseModel {
     private String value;
     private Date expiryAt;
     @ManyToOne
