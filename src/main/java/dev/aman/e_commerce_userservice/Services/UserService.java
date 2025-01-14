@@ -53,10 +53,24 @@ public class UserService {
         return userRepository.save(user);
     }
     public void logout(String token){
-
+        Optional<Token> logoutToken = tokenRepository.findByValueAndDeletedAndExpiryAtGreaterThan(token,
+                false, new Date());
+        if(logoutToken.isEmpty()){
+            throw new RuntimeException("Token not found");
+        }
+        Token tokenFound = logoutToken.get();
+        tokenFound.setDeleted(true);
+        tokenRepository.save(tokenFound);
     }
     public User validateToken(String token){
-        return null;
+        //first we need to check whether token is valid or not in DB
+        //We need to check whether its deleted value is true or false and expiry time
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeletedAndExpiryAtGreaterThan(token
+                , false, new Date());
+        if(optionalToken.isEmpty()){
+            return null;
+        }
+        return optionalToken.get().getUser();
     }
     private Token generateToken(User user){
         Token token = new Token();

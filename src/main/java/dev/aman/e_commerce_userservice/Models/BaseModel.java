@@ -17,5 +17,6 @@ public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    //this will help to check if token is their or we logged out
+    private boolean deleted;
 }

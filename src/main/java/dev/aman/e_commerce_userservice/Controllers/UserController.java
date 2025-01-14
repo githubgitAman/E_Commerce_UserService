@@ -44,6 +44,7 @@ public class UserController {
     @GetMapping("/validate")
     //we are returning User here because we might need to know the roles of user after validating
     public UserDTO validateToken(String token){
-        return null;
+        User user = userService.validateToken(token);
+        return UserDTO.from(user);
     }
 }
