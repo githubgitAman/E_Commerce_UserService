@@ -8,4 +8,10 @@ import org.antlr.v4.runtime.Token;
 @Setter
 public class logoutRequestDTOs {
     private String token;
+    public String getToken(){
+        return token;
+    }
+    public void setToken(String token){
+        this.token = token;
+    }
 }

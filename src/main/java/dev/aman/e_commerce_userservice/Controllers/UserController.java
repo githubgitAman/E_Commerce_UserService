@@ -39,11 +39,11 @@ public class UserController {
     }
     @PatchMapping("/logout")
     public void logout(@RequestBody logoutRequestDTOs requestDTOs){
-
+        userService.logout(requestDTOs.getToken());
     }
-    @GetMapping("/validate")
+    @GetMapping("/validate/{token}")
     //we are returning User here because we might need to know the roles of user after validating
-    public UserDTO validateToken(String token){
+    public UserDTO validateToken(@PathVariable String token){
         User user = userService.validateToken(token);
         return UserDTO.from(user);
     }

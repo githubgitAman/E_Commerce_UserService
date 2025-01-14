@@ -10,6 +10,10 @@ import java.util.Optional;
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Long> {
 
+    //save method act like a update and insert
+    //if incoming token as id then it will update else save
+    //also called Upsert i.e Update + Insert
+    Token save(Token token);
     Optional<Token> findByValueAndDeletedAndExpiryAtGreaterThan(String value, boolean deleted, Date expiryAtIsGreaterThan);
-    Token markTokenAsDeleted(String value, boolean deleted);
+
 }
